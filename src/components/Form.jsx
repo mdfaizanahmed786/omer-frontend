@@ -1,52 +1,24 @@
 import { useState } from "react";
+import { useMutation } from "react-query";
 
 const ApplicationForm = () => {
   const [formValues, setFormValues] = useState({
     candidateName: "",
     fatherName: "",
     motherName: "",
-    profilePicture: null,
     dob: "",
     age: "",
-    placeOfBirth: "",
-    nationality: "",
-    religion: "",
-    motherTongue: "",
-    profession: "",
-    income: "",
-    workPlace: "",
-    presentAddress: "",
-    pincode: "",
-    fatherPhone: "",
+
     mark1: "",
     mark2: "",
     aadhar: "",
-    hallTicket: "",
+
     marksObtained: "",
+
     rankSecured: "",
-    college1: "",
-    grade1: "",
-    totalMarksLanguages1: "",
-    totalMarksOptionals1: "",
-    overallPercentage1: "",
-    percentageOptionals1: "",
-    yearPassing1: "",
-    rollNo1: "",
-    college2: "",
-    grade2: "",
-    totalMarksLanguages2: "",
-    totalMarksOptionals2: "",
-    overallPercentage2: "",
-    percentageOptionals2: "",
-    yearPassing2: "",
-    rollNo2: "",
+
     headmasterName: "",
     schoolName: "",
-    schoolLocation: "",
-    studentName: "",
-    studentFatherName: "",
-    admissionNumber: "",
-    academicYear: "",
   });
 
   const handleChange = (event) => {
@@ -59,12 +31,23 @@ const ApplicationForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Handle form submission logic here
-    console.log(formValues);
   };
 
+  const { mutate, isLoading } = useMutation({
+    mutationFn: fetch("http://localhost:5000/student/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formValues),
+    }),
+  });
+
   return (
-    <form className="application-form mx-auto max-w-md px-4 py-6 shadow-lg rounded-lg bg-white" onSubmit={handleSubmit}>
+    <form
+      className="application-form mx-auto max-w-md px-4 py-6 shadow-lg rounded-lg bg-white"
+      onSubmit={handleSubmit}
+    >
       {/* The rest of the form HTML remains the same */}
       <li className="form-field">
         <label htmlFor="candidate-name">Name of Candidate:</label>
@@ -74,7 +57,32 @@ const ApplicationForm = () => {
           name="candidateName"
           value={formValues.candidateName}
           onChange={handleChange}
-          required    className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+          required
+          className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+        />
+      </li>
+      <li className="form-field">
+        <label htmlFor="candidate-name">Date of birth</label>
+        <input
+          type="text"
+          id="age"
+          name="dob"
+          value={formValues.dob}
+          onChange={handleChange}
+          required
+          className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+        />
+      </li>
+      <li className="form-field">
+        <label htmlFor="age">Age</label>
+        <input
+          type="text"
+          id="candidate-name"
+          name="age"
+          value={formValues.age}
+          onChange={handleChange}
+          required
+          className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
       <li className="form-field">
@@ -85,7 +93,8 @@ const ApplicationForm = () => {
           name="fatherName"
           value={formValues.fatherName}
           onChange={handleChange}
-          required    className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+          required
+          className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
       <li className="form-field">
@@ -96,7 +105,8 @@ const ApplicationForm = () => {
           name="motherName"
           value={formValues.motherName}
           onChange={handleChange}
-          required    className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+          required
+          className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
       <li className="form-field">
@@ -108,7 +118,8 @@ const ApplicationForm = () => {
           placeholder="Identification Mark 1"
           value={formValues.mark1}
           onChange={handleChange}
-          required    className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+          required
+          className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
       <li className="form-field">
@@ -120,7 +131,8 @@ const ApplicationForm = () => {
           placeholder="Identification Mark 2"
           value={formValues.mark2}
           onChange={handleChange}
-          required    className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+          required
+          className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
       <li className="form-field">
@@ -131,12 +143,15 @@ const ApplicationForm = () => {
           name="aadhar"
           value={formValues.aadhar}
           onChange={handleChange}
-          required    className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+          required
+          className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
       <li className="form-field">
         <fieldset>
-          <legend  className="form-legend text-xl font-bold mb-2" >Eamcet Details:</legend>
+          <legend className="form-legend text-xl font-bold mb-2">
+            Eamcet Details:
+          </legend>
           <ol>
             <li className="form-field">
               <label htmlFor="hall-ticket">
@@ -148,7 +163,8 @@ const ApplicationForm = () => {
                 name="hallTicket"
                 value={formValues.hallTicket}
                 onChange={handleChange}
-                required    className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+                required
+                className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
               />
             </li>
             <li className="form-field">
@@ -161,7 +177,8 @@ const ApplicationForm = () => {
                 name="marksObtained"
                 value={formValues.marksObtained}
                 onChange={handleChange}
-                required    className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+                required
+                className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
               />
             </li>
             <li className="form-field">
@@ -172,7 +189,8 @@ const ApplicationForm = () => {
                 name="rankSecured"
                 value={formValues.rankSecured}
                 onChange={handleChange}
-                required    className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+                required
+                className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
               />
             </li>
           </ol>
@@ -180,17 +198,17 @@ const ApplicationForm = () => {
       </li>
       <li className="form-field">
         <fieldset>
-          <legend  className="form-legend text-xl font-bold mb-2" >
+          <legend className="form-legend text-xl font-bold mb-2">
             Details of Intermediate / Polytechnic or its Equivalent:
           </legend>
-          <ol>
-         
-          </ol>
+          <ol></ol>
         </fieldset>
       </li>
       <li className="form-field">
         <fieldset>
-          <legend  className="form-legend text-xl font-bold mb-2" >Minority Certificate</legend>
+          <legend className="form-legend text-xl font-bold mb-2">
+            Minority Certificate
+          </legend>
           <ol>
             <li className="form-field">
               <label htmlFor="headmaster-name">Headmaster name:</label>
@@ -200,7 +218,8 @@ const ApplicationForm = () => {
                 name="headmasterName"
                 value={formValues.headmasterName}
                 onChange={handleChange}
-                required    className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+                required
+                className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
               />
             </li>
             <li className="form-field">
@@ -211,15 +230,22 @@ const ApplicationForm = () => {
                 name="schoolName"
                 value={formValues.schoolName}
                 onChange={handleChange}
-                required    className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+                required
+                className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
               />
             </li>
-          
           </ol>
         </fieldset>
       </li>
-     
-      <input type="submit" value="Submit"  className="w-full py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer"/>
+
+      <button
+        type="button"
+        value="Submit"
+        className="w-full py-3 mt-6 bg-blue-500 text-white rounded-md hover:bg-blue-600 cursor-pointer"
+        onClick={() => mutate()}
+      >
+        {isLoading ? "Loading..." : "Submit"}
+      </button>
     </form>
   );
 };

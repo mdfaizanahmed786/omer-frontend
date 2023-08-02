@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 const ApplicationForm = () => {
+    const navigate=useNavigate();
   const [formValues, setFormValues] = useState({
     candidateName: "",
     fatherName: "",
@@ -34,13 +36,17 @@ const ApplicationForm = () => {
   };
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: fetch("http://localhost:5000/student/add", {
+    mutationFn:()=> fetch("http://localhost:5000/application/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formValues),
-    }),
+    }).then((res) => res.json()),
+    onSuccess: () => {
+      alert("Application submitted successfully");
+        navigate("/allforms");
+    },
   });
 
   return (
@@ -49,7 +55,7 @@ const ApplicationForm = () => {
       onSubmit={handleSubmit}
     >
       {/* The rest of the form HTML remains the same */}
-      <li className="form-field">
+      <li className="form-field list-none">
         <label htmlFor="candidate-name">Name of Candidate:</label>
         <input
           type="text"
@@ -61,7 +67,7 @@ const ApplicationForm = () => {
           className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
-      <li className="form-field">
+      <li className="form-field list-none">
         <label htmlFor="candidate-name">Date of birth</label>
         <input
           type="text"
@@ -73,7 +79,7 @@ const ApplicationForm = () => {
           className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
-      <li className="form-field">
+      <li className="form-field list-none">
         <label htmlFor="age">Age</label>
         <input
           type="text"
@@ -85,7 +91,7 @@ const ApplicationForm = () => {
           className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
-      <li className="form-field">
+      <li className="form-field list-none">
         <label htmlFor="father-name">Name of Father:</label>
         <input
           type="text"
@@ -97,7 +103,7 @@ const ApplicationForm = () => {
           className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
-      <li className="form-field">
+      <li className="form-field list-none">
         <label htmlFor="mother-name">Name of Mother:</label>
         <input
           type="text"
@@ -109,7 +115,7 @@ const ApplicationForm = () => {
           className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
-      <li className="form-field">
+      <li className="form-field list-none">
         <label htmlFor="mark1">Identification Mark 1:</label>
         <input
           type="text"
@@ -122,7 +128,7 @@ const ApplicationForm = () => {
           className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
-      <li className="form-field">
+      <li className="form-field list-none">
         <label htmlFor="mark2">Identification Mark 2:</label>
         <input
           type="text"
@@ -135,7 +141,7 @@ const ApplicationForm = () => {
           className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
-      <li className="form-field">
+      <li className="form-field list-none">
         <label htmlFor="aadhar">Student Aadhar (UID No):</label>
         <input
           type="text"
@@ -147,13 +153,13 @@ const ApplicationForm = () => {
           className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
         />
       </li>
-      <li className="form-field">
+      <li className="form-field list-none">
         <fieldset>
           <legend className="form-legend text-xl font-bold mb-2">
             Eamcet Details:
           </legend>
           <ol>
-            <li className="form-field">
+            <li className="form-field list-none">
               <label htmlFor="hall-ticket">
                 HallTicket Number Eamcet/ECET:
               </label>
@@ -167,7 +173,7 @@ const ApplicationForm = () => {
                 className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
               />
             </li>
-            <li className="form-field">
+            <li className="form-field list-none">
               <label htmlFor="marks-obtained">
                 Marks Obtained in Eamcet/ECET:
               </label>
@@ -181,7 +187,7 @@ const ApplicationForm = () => {
                 className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
               />
             </li>
-            <li className="form-field">
+            <li className="form-field list-none">
               <label htmlFor="rank-secured">Rank Secured in Eamcet/ECET:</label>
               <input
                 type="text"
@@ -196,7 +202,7 @@ const ApplicationForm = () => {
           </ol>
         </fieldset>
       </li>
-      <li className="form-field">
+      <li className="form-field list-none">
         <fieldset>
           <legend className="form-legend text-xl font-bold mb-2">
             Details of Intermediate / Polytechnic or its Equivalent:
@@ -204,13 +210,13 @@ const ApplicationForm = () => {
           <ol></ol>
         </fieldset>
       </li>
-      <li className="form-field">
+      <li className="form-field list-none">
         <fieldset>
           <legend className="form-legend text-xl font-bold mb-2">
             Minority Certificate
           </legend>
           <ol>
-            <li className="form-field">
+            <li className="form-field list-none">
               <label htmlFor="headmaster-name">Headmaster name:</label>
               <input
                 type="text"
@@ -222,7 +228,7 @@ const ApplicationForm = () => {
                 className="block w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
               />
             </li>
-            <li className="form-field">
+            <li className="form-field list-none">
               <label htmlFor="school-name">School Name:</label>
               <input
                 type="text"

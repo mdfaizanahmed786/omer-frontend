@@ -1,7 +1,9 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./App.css";
-import ApplicationForm from "./components/Form";
-import Navbar from "./components/Navbar";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import AllForms from "./components/AllForms";
 
 function App() {
   const queryClient = new QueryClient();
@@ -9,8 +11,12 @@ function App() {
   return (
     <div className="w-full">
       <QueryClientProvider client={queryClient}>
-        <Navbar />
-        <ApplicationForm />
+        <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/allforms" element={<AllForms />} />
+        </Routes>
+        </BrowserRouter>
       </QueryClientProvider>
     </div>
   );

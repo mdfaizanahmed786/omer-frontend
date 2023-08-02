@@ -5,7 +5,7 @@ function AllForms() {
   const { data, isLoading } = useQuery({
     queryKey: "allForms",
     queryFn: () =>
-      fetch("http://localhost:5000/application/get").then((res) => res.json()),
+      fetch("http://localhost:5002/application/get").then((res) => res.json()),
   });
   return (
     <div>

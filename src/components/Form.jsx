@@ -36,7 +36,7 @@ const ApplicationForm = () => {
   };
 
   const { mutate, isLoading } = useMutation({
-    mutationFn:()=> fetch("http://localhost:5000/application/add", {
+    mutationFn:()=> fetch("http://localhost:5002/application/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
